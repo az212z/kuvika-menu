@@ -1,0 +1,461 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#171310">
+<title>مقهى ومحمصة كوفيكا · KOFFIQA — القائمة</title>
+<meta name="description" content="القائمة الرقمية التفاعلية لمقهى ومحمصة كوفيكا في بريدة — قهوة مختصة وحلا. اطلب مباشرة عبر واتساب.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1712; --ink-soft:#5b5148; --paper:#f4efe8; --paper-2:#eae2d6;
+  --card:#ffffff; --line:#e2d8c9; --gold:#b1874b; --gold-deep:#8a6531;
+  --espresso:#26201a; --espresso-2:#171310; --shadow:rgba(38,26,14,.12);
+  --ok:#3f7d4f;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Tajawal',system-ui,sans-serif;color:var(--ink);
+  background:var(--espresso-2);line-height:1.7;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.en{font-family:'Cormorant Garamond',serif;letter-spacing:.02em}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* phone-frame backdrop on desktop */
+.shell{
+  max-width:480px;margin:0 auto;background:var(--paper);
+  min-height:100vh;position:relative;
+  box-shadow:0 0 80px rgba(0,0,0,.5);
+}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;color:#fff;overflow:hidden;
+  padding:34px 22px 30px;
+  background:
+    linear-gradient(180deg,rgba(23,19,16,.62) 0%,rgba(23,19,16,.86) 62%,var(--espresso-2) 100%),
+    url('assets/exterior.jpg') center/cover no-repeat;
+}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 80% 0%,rgba(177,135,75,.22),transparent 55%);pointer-events:none}
+.brandrow{display:flex;align-items:center;gap:13px;position:relative;z-index:2}
+.mark{width:56px;height:56px;flex:0 0 auto;border-radius:16px;
+  background:linear-gradient(150deg,var(--gold),var(--gold-deep));
+  display:grid;place-items:center;box-shadow:0 8px 22px rgba(177,135,75,.4)}
+.mark svg{width:34px;height:34px}
+.brandtxt h1{font-size:1.42rem;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.brandtxt .lat{font-size:.72rem;letter-spacing:.32em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:2px}
+.hero .meta{position:relative;z-index:2;margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+.chip-meta{background:rgba(255,255,255,.1);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.16);border-radius:999px;
+  padding:6px 13px;font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:6px}
+.chip-meta.star{color:#ffd98a;border-color:rgba(255,217,138,.35)}
+.tagline{position:relative;z-index:2;margin-top:16px;font-size:.98rem;color:#e9dfd0;max-width:34ch}
+.tagline b{color:#fff;font-weight:700}
+
+/* ---------- SEARCH + CATEGORY BAR ---------- */
+.tools{position:sticky;top:0;z-index:40;background:var(--paper);
+  border-bottom:1px solid var(--line);padding:12px 0 0;
+  box-shadow:0 6px 18px -12px var(--shadow)}
+.search-wrap{padding:0 18px 10px}
+.search{width:100%;display:flex;align-items:center;gap:9px;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:11px 14px;
+  transition:border-color .2s,box-shadow .2s}
+.search:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(177,135,75,.14)}
+.search svg{width:18px;height:18px;flex:0 0 auto;color:var(--ink-soft)}
+.search input{border:none;outline:none;width:100%;font-family:inherit;font-size:.98rem;background:transparent;color:var(--ink)}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:0 18px 12px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{white-space:nowrap;border:1px solid var(--line);background:var(--card);
+  color:var(--ink-soft);border-radius:999px;padding:8px 15px;font-size:.86rem;font-weight:700;
+  transition:all .22s ease}
+.cat.active{background:var(--espresso);color:#fff;border-color:var(--espresso);box-shadow:0 6px 14px -6px var(--shadow)}
+
+/* ---------- SECTIONS ---------- */
+main{padding:6px 18px 130px}
+.section{padding-top:26px;scroll-margin-top:120px}
+.sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.sec-head h2{font-size:1.24rem;font-weight:800}
+.sec-head .lat{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--gold-deep);letter-spacing:.12em}
+.sec-head .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+/* ---------- ITEM CARD ---------- */
+.item{display:flex;gap:13px;align-items:stretch;background:var(--card);
+  border:1px solid var(--line);border-radius:18px;padding:11px;margin-bottom:12px;
+  transition:opacity .5s ease,transform .5s ease,box-shadow .25s}
+/* animate-in only when JS is active AND motion allowed; default (no-JS/throttled) = fully visible */
+html.js .item{opacity:0;transform:translateY(14px);will-change:transform,opacity}
+html.js .item.in{opacity:1;transform:none}
+.item:active{box-shadow:0 10px 26px -14px var(--shadow)}
+.thumb{width:82px;height:82px;flex:0 0 auto;border-radius:13px;overflow:hidden;position:relative;background:var(--paper-2)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb.ph{display:grid;place-items:center;background:linear-gradient(150deg,var(--paper-2),#ded2be)}
+.thumb.ph svg{width:34px;height:34px;color:var(--gold-deep);opacity:.75}
+.info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.info h3{font-size:1.02rem;font-weight:700;line-height:1.35}
+.info .lat{font-size:.72rem;color:var(--ink-soft);letter-spacing:.04em;font-weight:600}
+.info p{font-size:.82rem;color:var(--ink-soft);margin-top:3px;line-height:1.5}
+.info .cal{font-size:.7rem;color:#a2937f;margin-top:3px;font-weight:500}
+.priceline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+.price{font-weight:800;font-size:1.02rem;color:var(--gold-deep);display:flex;align-items:baseline;gap:3px}
+.price .cur{font-size:.68rem;font-weight:700;color:var(--ink-soft)}
+.price.na{font-size:.8rem;color:var(--ink-soft);font-weight:600}
+.add{width:36px;height:36px;flex:0 0 auto;border-radius:11px;background:var(--espresso);color:#fff;
+  font-size:1.35rem;line-height:1;display:grid;place-items:center;transition:transform .15s,background .2s}
+.add:active{transform:scale(.86);background:var(--gold-deep)}
+
+.empty{text-align:center;color:var(--ink-soft);padding:50px 20px;font-weight:500;display:none}
+.empty.show{display:block}
+
+/* ---------- FLOATING CART BTN ---------- */
+.cartbtn{position:fixed;left:0;right:0;bottom:0;z-index:60;pointer-events:none;
+  display:flex;justify-content:center;padding:0 0 max(16px,env(safe-area-inset-bottom))}
+.cartbtn .inner{pointer-events:auto;max-width:452px;width:calc(100% - 36px);
+  background:var(--espresso);color:#fff;border-radius:16px;padding:14px 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  box-shadow:0 14px 34px -10px rgba(23,19,16,.6);transform:translateY(140%);
+  transition:transform .4s cubic-bezier(.2,.9,.25,1)}
+.cartbtn.show .inner{transform:none}
+.cartbtn .count{background:var(--gold);color:#241a0e;font-weight:800;min-width:26px;height:26px;
+  border-radius:8px;display:grid;place-items:center;font-size:.9rem;padding:0 6px}
+.cartbtn .lbl{font-weight:700;flex:1;display:flex;align-items:center;gap:9px}
+.cartbtn .go{font-weight:700;font-size:.92rem;display:flex;align-items:center;gap:6px;color:#ffd98a}
+
+/* ---------- DRAWER ---------- */
+.scrim{position:fixed;inset:0;z-index:70;background:rgba(15,11,8,.55);opacity:0;visibility:hidden;transition:opacity .3s}
+.scrim.show{opacity:1;visibility:visible}
+.drawer{position:fixed;left:0;right:0;bottom:0;z-index:80;background:var(--paper);
+  max-width:480px;margin:0 auto;border-radius:22px 22px 0 0;
+  transform:translateY(100%);transition:transform .42s cubic-bezier(.2,.9,.25,1);
+  max-height:86vh;display:flex;flex-direction:column;box-shadow:0 -12px 40px rgba(0,0,0,.3)}
+.drawer.show{transform:none}
+.grip{width:44px;height:5px;border-radius:3px;background:var(--line);margin:11px auto 4px}
+.dhead{padding:6px 20px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.dhead h3{font-size:1.16rem;font-weight:800}
+.dhead button{color:var(--ink-soft);font-size:1.5rem;line-height:1;width:34px;height:34px}
+.dlist{overflow-y:auto;padding:8px 20px;flex:1}
+.drow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.drow:last-child{border-bottom:none}
+.drow .dn{flex:1;min-width:0}
+.drow .dn h4{font-size:.96rem;font-weight:700}
+.drow .dn span{font-size:.8rem;color:var(--gold-deep);font-weight:700}
+.qty{display:flex;align-items:center;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.qty button{width:32px;height:32px;font-size:1.2rem;color:var(--espresso);display:grid;place-items:center}
+.qty span{min-width:24px;text-align:center;font-weight:800;font-size:.95rem}
+.dempty{text-align:center;color:var(--ink-soft);padding:40px 10px;font-weight:500}
+.dfoot{padding:14px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--paper-2)}
+.totrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.totrow .t1{font-weight:500;color:var(--ink-soft)}
+.totrow .t2{font-weight:800;font-size:1.25rem;color:var(--espresso)}
+.totrow .t2 .cur{font-size:.72rem;color:var(--ink-soft);font-weight:700}
+.wa{width:100%;background:#1faf54;color:#fff;border-radius:15px;padding:15px;font-weight:800;font-size:1.04rem;
+  display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s,filter .2s}
+.wa:active{transform:scale(.98);filter:brightness(1.05)}
+.wa svg{width:22px;height:22px}
+.note{text-align:center;font-size:.74rem;color:var(--ink-soft);margin-top:9px}
+
+/* ---------- FAB whatsapp ---------- */
+.fab{position:fixed;z-index:55;bottom:calc(84px + env(safe-area-inset-bottom));left:18px;
+  width:52px;height:52px;border-radius:50%;background:#1faf54;display:grid;place-items:center;
+  box-shadow:0 10px 24px -6px rgba(31,175,84,.6);transition:transform .2s,bottom .3s}
+.fab:active{transform:scale(.9)}
+.fab svg{width:27px;height:27px;color:#fff}
+@media(min-width:481px){.fab{left:calc(50% - 240px + 18px)}}
+
+/* footer */
+footer{text-align:center;padding:20px 18px 40px;color:var(--ink-soft);font-size:.78rem;background:var(--paper)}
+footer .divider{width:40px;height:2px;background:var(--gold);margin:0 auto 14px;border-radius:2px}
+footer a{color:var(--gold-deep);text-decoration:none;font-weight:700}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  .item{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<div class="shell">
+  <!-- HERO -->
+  <header class="hero">
+    <div class="brandrow">
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8z"/>
+          <path d="M16 9h2.4a2.6 2.6 0 0 1 0 5.2H16"/>
+          <path d="M7.5 4.5c-.5.7-.5 1.3 0 2M10.5 4.5c-.5.7-.5 1.3 0 2M13 4.5c-.5.7-.5 1.3 0 2"/>
+        </svg>
+      </div>
+      <div class="brandtxt">
+        <h1>مقهى ومحمصة كوفيكا</h1>
+        <div class="lat en">KOFFIQA · Specialty</div>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="chip-meta star">★ ٤٫٣ <span style="opacity:.8;font-weight:400">(٣١١ تقييم)</span></span>
+      <span class="chip-meta">بريدة · حي الريان</span>
+      <span class="chip-meta">محمصة قهوة مختصة</span>
+    </div>
+    <p class="tagline"><b>قهوة تُحمَّص عندنا</b> وحلا يُحضَّر بعناية — تصفّح القائمة واطلب طلبك مباشرة عبر واتساب.</p>
+  </header>
+
+  <!-- TOOLS -->
+  <div class="tools">
+    <div class="search-wrap">
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+        <input id="q" type="search" inputmode="search" placeholder="ابحث عن مشروب أو حلا…" aria-label="بحث في القائمة">
+      </label>
+    </div>
+    <div class="cats" id="cats"></div>
+  </div>
+
+  <main id="menu"></main>
+  <div class="empty" id="empty">ما لقينا نتيجة مطابقة — جرّب كلمة ثانية.</div>
+
+  <footer>
+    <div class="divider"></div>
+    مقهى ومحمصة كوفيكا · بريدة، حي الريان<br>
+    التقييم ٤٫٣★ على خرائط قوقل · الأسعار بالريال السعودي<br>
+    <a id="wa-foot" href="#">واتساب: 0538466232</a>
+    <div style="margin-top:14px;opacity:.6;font-size:.72rem">قائمة رقمية · تصميم واقِع</div>
+  </footer>
+</div>
+
+<!-- WhatsApp FAB -->
+<a class="fab" id="fab" href="#" aria-label="تواصل عبر واتساب">
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.8 1.5 5.9 1.5 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.8c-1.9 0-3.7-.5-5.2-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 0 1-1.5-5.5C5.7 9.8 10.3 5.2 16 5.2s10.3 4.6 10.3 10.3S21.7 25.8 16 25.8zm5.7-7.7c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5s.1-.4 0-.6-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.3 1.4 3.5c.2.3 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5s-.3-.2-.6-.4z"/></svg>
+</a>
+
+<!-- CART button -->
+<div class="cartbtn" id="cartbtn">
+  <button class="inner" id="cartopen">
+    <span class="lbl"><span class="count" id="cnt">0</span> عرض الطلب</span>
+    <span class="go" id="cartsum">٠ ر.س ›</span>
+  </button>
+</div>
+
+<!-- Drawer -->
+<div class="scrim" id="scrim"></div>
+<div class="drawer" id="drawer" role="dialog" aria-label="طلبك">
+  <div class="grip"></div>
+  <div class="dhead"><h3>طلبك</h3><button id="dclose" aria-label="إغلاق">×</button></div>
+  <div class="dlist" id="dlist"></div>
+  <div class="dfoot">
+    <div class="totrow"><span class="t1">الإجمالي (للأصناف المُسعّرة)</span><span class="t2" id="tot">٠ <span class="cur">ر.س</span></span></div>
+    <button class="wa" id="send">
+      <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.8 1.5 5.9 1.5 7 0 12.5-5.5 12.5-12.5S23 3 16 3z"/></svg>
+      أرسل الطلب عبر واتساب
+    </button>
+    <div class="note">يُفتح واتساب برسالة جاهزة بأصنافك — يؤكّدها المقهى.</div>
+  </div>
+</div>
+
+<script>
+const WA="966538466232";
+const RS="ر.س";
+// icons for placeholders
+const IC={coffee:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8z"/><path d="M16 9h2.4a2.6 2.6 0 0 1 0 5.2H16"/><path d="M8 3.5c-.5.7-.5 1.3 0 2M11 3.5c-.5.7-.5 1.3 0 2"/></svg>',
+  cold:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9h12l-1.2 10a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 9z"/><path d="M6 9l-1-4h14l-1 4"/><path d="M10 13v4M14 13v4"/></svg>',
+  water:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg>'};
+
+// MENU DATA
+// prices from the real KOFFIQA "Sweets/Water" menu photo (Google Maps). Coffee prices unknown -> priced:false.
+const CATS=[
+  {id:'hot', ar:'قهوة ساخنة', en:'Hot'},
+  {id:'cold', ar:'قهوة باردة', en:'Cold'},
+  {id:'sweets', ar:'حلا', en:'Sweets'},
+  {id:'water', ar:'مياه', en:'Water'}
+];
+const ITEMS=[
+  // HOT — from photos, no printed prices -> price omitted
+  {c:'hot', ar:'لاتيه', en:'Latte', d:'إسبريسو مخملي بحليب مرغى وطبقة كريمية.', img:'assets/latte.jpg'},
+  {c:'hot', ar:'كورتادو', en:'Cortado', d:'جرعة إسبريسو متوازنة مع قليل من الحليب.', img:'assets/cortado.jpg'},
+  {c:'hot', ar:'قهوة اليوم', en:'Filter / V60', d:'محصول مختص مُحمَّص عندنا، تحضير يدوي.', ic:'coffee'},
+  {c:'hot', ar:'إسبريسو', en:'Espresso', d:'قاعدة القهوة، غنية وكثيفة الكريمة.', ic:'coffee'},
+
+  // COLD
+  {c:'cold', ar:'آيس أمريكانو', en:'Iced Americano', d:'إسبريسو على ثلج وماء بارد — منعش وصافٍ.', img:'assets/coldbrew.jpg'},
+  {c:'cold', ar:'آيس لاتيه أوريو', en:'Iced Oreo Latte', d:'لاتيه بارد بلمسة أوريو كريمية.', img:'assets/oreo.jpg'},
+  {c:'cold', ar:'آيس لاتيه', en:'Iced Latte', d:'حليب بارد وإسبريسو على ثلج.', ic:'cold'},
+
+  // SWEETS — real prices from menu photo
+  {c:'sweets', ar:'تشيز كيك مدريد', en:'Madrid Cheese Cake', d:'قطعة تشيز كيك كريمية بنكهة مدريد.', p:24, cal:276, img:'assets/cheesecake.jpg'},
+  {c:'sweets', ar:'تيراميسو', en:'Tiramisu', d:'طبقات كريمة المسكربوني بالقهوة.', p:30, cal:320, img:'assets/tray.jpg'},
+  {c:'sweets', ar:'تشوكلت كراميل تارت', en:'Chocolate Caramel Tart', d:'تارت شوكولاتة غنية بطبقة كراميل.', p:23, cal:275, img:'assets/brownie.jpg'},
+  {c:'sweets', ar:'بودينق الشوكولاته', en:'Chocolate Pudding', d:'بودينق شوكولاتة طري وكثيف.', p:22, cal:290, ic:'coffee'},
+  {c:'sweets', ar:'كيكة الجزر', en:'Carrot Cake', d:'كيكة جزر رطبة بلمسة قرفة.', p:17, cal:315, ic:'coffee'},
+  {c:'sweets', ar:'تشيز كيك لوتس', en:'Lotus Cheese Cake', d:'تشيز كيك بطبقة لوتس المميزة.', p:15, cal:245, ic:'coffee'},
+  {c:'sweets', ar:'ويفر رول', en:'Waffer Roll', d:'ويفر رول مقرمش — بوكس واحد.', p:12, cal:420, ic:'coffee'},
+  {c:'sweets', ar:'كلاسيك كوكيز', en:'Classic Cookies', d:'كوكيز كلاسيكية طرية.', p:11, cal:375, ic:'coffee'},
+  {c:'sweets', ar:'كيندر كوكيز', en:'Kinder Cookies', d:'كوكيز محشوة بكيندر.', p:11, cal:375, ic:'coffee'},
+  {c:'sweets', ar:'طحينة ترافل', en:'Tahini Truffle', d:'قطعتان من ترافل الطحينة الفاخر.', p:8, cal:59, ic:'coffee'},
+  {c:'sweets', ar:'كرات البروتين — جوز الهند', en:'Coconut Protein Balls', d:'كرات بروتين بجوز الهند — خيار خفيف.', p:6, cal:79, ic:'coffee'},
+  {c:'sweets', ar:'كرات البروتين — بيستاشيو', en:'Pistachio Protein Balls', d:'كرات بروتين بالفستق.', p:6, cal:101, ic:'coffee'},
+  {c:'sweets', ar:'كرات البروتين — فول سوداني', en:'Peanut Protein Balls', d:'كرات بروتين بالفول السوداني.', p:6, cal:105, ic:'coffee'},
+
+  // WATER — real prices
+  {c:'water', ar:'مياه نوفا', en:'Nova Water', d:'مياه معدنية باردة.', p:5, cal:0, ic:'water'},
+  {c:'water', ar:'مياه غازية', en:'Sparkling Water', d:'مياه فوارة منعشة.', p:5, cal:0, ic:'water'}
+];
+
+const arDigits=n=>String(n).replace(/[0-9]/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const cart={}; // id -> qty
+const idOf=it=>ITEMS.indexOf(it);
+
+// build category chips
+const catsEl=document.getElementById('cats');
+CATS.forEach((c,i)=>{
+  const b=document.createElement('button');
+  b.className='cat'+(i===0?' active':'');b.dataset.cat=c.id;
+  b.innerHTML=c.ar;
+  b.onclick=()=>{ document.getElementById('sec-'+c.id).scrollIntoView({behavior:'smooth',block:'start'}); };
+  catsEl.appendChild(b);
+});
+
+// build sections
+const menuEl=document.getElementById('menu');
+CATS.forEach(c=>{
+  const sec=document.createElement('section');
+  sec.className='section';sec.id='sec-'+c.id;sec.dataset.cat=c.id;
+  sec.innerHTML=`<div class="sec-head"><h2>${c.ar}</h2><span class="lat">${c.en}</span><span class="rule"></span></div>`;
+  ITEMS.filter(it=>it.c===c.id).forEach(it=>{
+    const id=idOf(it);
+    const thumb= it.img
+      ? `<div class="thumb"><img src="${it.img}" alt="${it.ar}" loading="lazy"></div>`
+      : `<div class="thumb ph">${IC[it.ic]||IC.coffee}</div>`;
+    const price= (it.p!=null)
+      ? `<span class="price">${arDigits(it.p)}<span class="cur">${RS}</span></span>`
+      : `<span class="price na">السعر عند الطلب</span>`;
+    const cal= (it.cal!=null)?`<div class="cal">${arDigits(it.cal)} سعرة</div>`:'';
+    const card=document.createElement('article');
+    card.className='item';card.dataset.id=id;
+    card.dataset.name=(it.ar+' '+it.en).toLowerCase();
+    card.innerHTML=`${thumb}
+      <div class="info">
+        <h3>${it.ar} <span class="lat en">${it.en}</span></h3>
+        <p>${it.d}</p>${cal}
+        <div class="priceline">${price}
+          <button class="add" data-add="${id}" aria-label="أضف ${it.ar}">＋</button>
+        </div>
+      </div>`;
+    sec.appendChild(card);
+  });
+  menuEl.appendChild(sec);
+});
+
+// scroll reveal — items are visible by default; only opt into the animation
+// via html.js when we can guarantee it will complete. Hard fallback removes it.
+const allItems=[...document.querySelectorAll('.item')];
+const root=document.documentElement;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function revealAll(){allItems.forEach(el=>el.classList.add('in'));}
+if('IntersectionObserver'in window && !reduce){
+  root.classList.add('js');           // enable the hidden->reveal animation
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -5% 0px'});
+  allItems.forEach(el=>io.observe(el));
+  // safety nets: reveal everything if the observer is throttled (backgrounded tab, no scroll, etc.)
+  const safety=()=>{revealAll(); setTimeout(()=>{ // if still not painted, drop the animation entirely
+    if(getComputedStyle(allItems[0]).opacity!=='1') root.classList.remove('js');
+  },700);};
+  setTimeout(safety,1600);
+  window.addEventListener('load',()=>setTimeout(safety,500));
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)safety();});
+}
+// (if no IO or reduced motion: html.js never added, so items stay fully visible)
+
+// add to cart
+menuEl.addEventListener('click',e=>{
+  const b=e.target.closest('[data-add]');if(!b)return;
+  const id=b.dataset.add;cart[id]=(cart[id]||0)+1;render();
+  b.animate([{transform:'scale(.7)'},{transform:'scale(1)'}],{duration:200});
+});
+
+// search filter
+const q=document.getElementById('q'),empty=document.getElementById('empty');
+q.addEventListener('input',()=>{
+  const t=q.value.trim().toLowerCase();let any=false;
+  document.querySelectorAll('.item').forEach(el=>{
+    const show=!t||el.dataset.name.includes(t);
+    el.style.display=show?'':'none';if(show)any=true;
+  });
+  document.querySelectorAll('.section').forEach(sec=>{
+    const vis=[...sec.querySelectorAll('.item')].some(i=>i.style.display!=='none');
+    sec.style.display=vis?'':'none';
+  });
+  empty.classList.toggle('show',!any);
+});
+
+// scroll-spy for chips
+const secObs=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    const id=e.target.dataset.cat;
+    document.querySelectorAll('.cat').forEach(c=>c.classList.toggle('active',c.dataset.cat===id));
+  }});
+},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('.section').forEach(s=>secObs.observe(s));
+
+// cart render
+const cartbtn=document.getElementById('cartbtn'),cnt=document.getElementById('cnt'),
+  cartsum=document.getElementById('cartsum'),dlist=document.getElementById('dlist'),tot=document.getElementById('tot');
+function totals(){
+  let n=0,sum=0;
+  for(const id in cart){const it=ITEMS[id];n+=cart[id];if(it.p!=null)sum+=it.p*cart[id];}
+  return{n,sum};
+}
+function render(){
+  const{n,sum}=totals();
+  cnt.textContent=arDigits(n);
+  cartsum.textContent=arDigits(sum)+' '+RS+' ›';
+  cartbtn.classList.toggle('show',n>0);
+  document.getElementById('fab').style.display=n>0?'none':'grid';
+  tot.innerHTML=arDigits(sum)+' <span class="cur">'+RS+'</span>';
+  if(n===0){dlist.innerHTML='<div class="dempty">سلّتك فارغة — أضِف من القائمة.</div>';return;}
+  dlist.innerHTML='';
+  for(const id in cart){
+    const it=ITEMS[id];
+    const row=document.createElement('div');row.className='drow';
+    const pr= it.p!=null ? arDigits(it.p*cart[id])+' '+RS : 'عند الطلب';
+    row.innerHTML=`<div class="dn"><h4>${it.ar}</h4><span>${pr}</span></div>
+      <div class="qty">
+        <button data-dec="${id}" aria-label="إنقاص">−</button>
+        <span>${arDigits(cart[id])}</span>
+        <button data-inc="${id}" aria-label="زيادة">＋</button>
+      </div>`;
+    dlist.appendChild(row);
+  }
+}
+dlist.addEventListener('click',e=>{
+  const inc=e.target.closest('[data-inc]'),dec=e.target.closest('[data-dec]');
+  if(inc){cart[inc.dataset.inc]++;render();}
+  if(dec){const id=dec.dataset.dec;cart[id]--;if(cart[id]<=0)delete cart[id];render();}
+});
+
+// drawer open/close
+const scrim=document.getElementById('scrim'),drawer=document.getElementById('drawer');
+function open(){scrim.classList.add('show');drawer.classList.add('show');}
+function close(){scrim.classList.remove('show');drawer.classList.remove('show');}
+document.getElementById('cartopen').onclick=open;
+document.getElementById('dclose').onclick=close;
+scrim.onclick=close;
+
+// whatsapp send
+function waLink(text){return 'https://wa.me/'+WA+'?text='+encodeURIComponent(text);}
+document.getElementById('fab').href=waLink('السلام عليكم، حاب أستفسر عن قائمة مقهى كوفيكا 🙌');
+document.getElementById('wa-foot').href=waLink('السلام عليكم، حاب أستفسر عن كوفيكا');
+document.getElementById('send').onclick=()=>{
+  const{n,sum}=totals();
+  if(n===0){open();return;}
+  let lines=['السلام عليكم، حاب أطلب من مقهى كوفيكا:',''];
+  for(const id in cart){const it=ITEMS[id];const q=cart[id];
+    const pr= it.p!=null ? ' — '+arDigits(it.p*q)+' '+RS : ' — السعر عند الطلب';
+    lines.push('• '+it.ar+' ×'+arDigits(q)+pr);
+  }
+  lines.push('');
+  if(sum>0)lines.push('الإجمالي التقريبي: '+arDigits(sum)+' '+RS+' (عدا الأصناف غير المُسعّرة)');
+  lines.push('شكراً 🌟');
+  location.href=waLink(lines.join('\n'));
+};
+
+render();
+</script>
